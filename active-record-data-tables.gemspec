@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["kaspernj"]
-  s.date = "2013-06-03"
+  s.date = "2013-06-04"
   s.description = "Helping functionality for filtering, sorting and stuff like that with data-tables and ActiveRecord."
   s.email = "k@spernj.org"
   s.extra_rdoc_files = [
