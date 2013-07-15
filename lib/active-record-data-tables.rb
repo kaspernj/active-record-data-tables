@@ -149,7 +149,7 @@ class ActiveRecordDataTables
 
   # Escapes the given string to be used in a SQL statement.
   def escape(str)
-    return ActiveRecord::Base.connection.quote(str).slice(1, str.length - 1)
+    return ActiveRecord::Base.connection.quote_string(str)
   end
 
   # Escapes the given name as a column and checks for SQL-injections.
