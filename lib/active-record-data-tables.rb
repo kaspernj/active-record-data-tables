@@ -18,11 +18,11 @@ class ActiveRecordDataTables
     @executed = false
   end
 
-  def execute
+  def execute(args = {})
     @executed = true
-    @query = @model
+    @query = args[:search] || @model
 
-    filter
+    filter unless args[:skip_filter]
     sorting
     limit
 
@@ -69,7 +69,10 @@ class ActiveRecordDataTables
       elsif match = key.to_s.match(/^(.+)_like$/) and @model.column_names.include?(match[1])
         next if val.blank?
         table = @model.arel_table
-        @query = @query.where(table[match[1].to_sym].matches("%#{escape(val)}%"))
+        
+        val.to_s.strip.split(/\s+/).each do |str|
+          @query = @query.where(table[match[1].to_sym].matches("%#{escape(str)}%"))
+        end
       elsif @args[:filter]
         ret = @args[:filter].call(:key => key, :val => val, :query => @query)
         @query = ret if ret
